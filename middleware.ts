@@ -8,7 +8,7 @@ import {
     '/events/:id(.*)',
     '/sign-in(.*)',
     '/sign-up(.*)',
-    '/api/webhooks/(.*)'
+    '/api/webhooks/clerk(.*)'
   ])
 
   const isIgnoredRoute = createRouteMatcher([
@@ -20,9 +20,8 @@ import {
   export default clerkMiddleware((auth, req) => {
     if (isPublicRoute(req)) return 
 
-    if(!isIgnoredRoute(req)){
       auth().protect();
-    }
+
     
   })
 export const config = {
