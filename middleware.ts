@@ -4,10 +4,11 @@ import {
   } from "@clerk/nextjs/server"
 
   const isPublicRoute = createRouteMatcher([
-    '/',
-    '/events/:id',
+    '/(.*)',
+    '/events/:id(.*)',
     '/sign-in(.*)',
     '/sign-up(.*)',
+    '/api/webhooks/(.*)'
   ])
 
   const isIgnoredRoute = createRouteMatcher([
