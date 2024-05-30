@@ -8,7 +8,7 @@ import {
     '/events/:id(.*)',
     '/sign-in(.*)',
     '/sign-up(.*)',
-    '/app/api/webhooks/clerk/(.*)'
+    '/api/webhooks/clerk/(.*)'
   ])
 
   const isIgnoredRoute = createRouteMatcher([
