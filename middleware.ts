@@ -8,20 +8,14 @@ const isPublicRoute = createRouteMatcher([
   '/events/:id(.*)',
   '/sign-in(.*)',
   '/sign-up(.*)',
-  '/api/webhook/clerk(.*)',
+  '/app/api/webhook/clerk(.*)',
   '/api/webhook/stripe(.*)',
   '/api/uploadthing(.*)',
 ])
 
-const isIgnoredRoute = createRouteMatcher([
-  '/api/webhook/clerk(.*)',
-  '/api/webhook/stripe(.*)',
-  '/api/uploadthing(.*)'
-])
 
 export default clerkMiddleware((auth, req) => {
   if (isPublicRoute(req)) return
-
 
     auth().protect();
 
