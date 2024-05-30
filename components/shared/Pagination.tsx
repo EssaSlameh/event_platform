@@ -14,11 +14,17 @@ type PaginationProps = {
 const Pagination = ({ page, totalPages, urlParamName }: PaginationProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
-
+  
+  // Ensure page is a valid number and default it if necessary
+  const currentPage = isNaN(Number(page)) ? 1 : Number(page)
+  
   const onClick = (btnType: string) => {
     const pageValue = btnType === 'next' 
-      ? Number(page) + 1 
-      : Number(page) - 1
+      ? currentPage + 1 
+      : currentPage - 1
+
+    // Ensure pageValue is within valid bounds
+    if (pageValue < 1 || pageValue > totalPages) return
 
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
@@ -36,7 +42,7 @@ const Pagination = ({ page, totalPages, urlParamName }: PaginationProps) => {
         variant="outline"
         className="w-28"
         onClick={() => onClick('prev')}
-        disabled={Number(page) <= 1}
+        disabled={currentPage <= 1}
       >
         Previous
       </Button>
@@ -45,7 +51,7 @@ const Pagination = ({ page, totalPages, urlParamName }: PaginationProps) => {
         variant="outline"
         className="w-28"
         onClick={() => onClick('next')}
-        disabled={Number(page) >= totalPages}
+        disabled={currentPage >= totalPages}
       >
         Next
       </Button>
